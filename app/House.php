@@ -2,6 +2,7 @@
 
 namespace App;
 
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
 
 class House extends Model
@@ -37,7 +38,7 @@ class House extends Model
         return $imageUrl;
     }
 
-    public function getImageUrlPropertyAttribute($value){
+    public function getImageUrlPropertyAttribute(){
         $imageUrl = "";
         $ext = substr(strrchr($this->photo()->first()->imagePath,'.'), 1 );
         $property= str_replace(".{$ext}", "_property.{$ext}", $this->photo()->first()->imagePath);
@@ -47,7 +48,7 @@ class House extends Model
         }
         return $imageUrl;
     }
-    public function getImageUrlSlideAttribute($value){
+    public function getImageUrlSlideAttribute(){
         $imageUrl = "";
         $ext = substr(strrchr($this->photo()->first()->imagePath,'.'), 1 );
         $slide= str_replace(".{$ext}", "_slide.{$ext}", $this->photo()->first()->imagePath);
@@ -56,5 +57,12 @@ class House extends Model
             if (file_exists($imagePath)) $imageUrl = asset("{$this->dir}/" . $slide);
         }
         return $imageUrl;
+    }
+    public function getDescriptionHtmlAttribute(){
+        return $this->description ? Markdown::convertToHtml(e($this->description)) : NULL;
+    }
+
+    public function getLessorAttribute(){
+        return $this->lessor()->first();
     }
 }

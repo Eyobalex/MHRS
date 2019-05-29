@@ -22,8 +22,9 @@ Route::group(['prefix' => 'lessor', 'middleware' => ['role:lessor']], function (
 
 });
 Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HouseController@index')->name('home');
 Route::get('/about', function (){return view('about');})->name('about');
 Route::get('/contact', function (){return view('contact');})->name('contact');
-Route::get('/test', 'HouseController@create')->name('house');
+Route::get('/test', function (\App\House $house){return view('test');})->name('test');

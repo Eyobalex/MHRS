@@ -9,7 +9,7 @@
 </head>
 <body>
 
- {!! Form::model($house, ['route' => 'house.store', 'method' => 'post', 'files' => true]) !!}
+ {!! Form::model( ['route' => 'house.store', 'method' => 'post', 'files' => true]) !!}
 {!! Form::text('title', null, ['class' => 'form-control']) !!}
 {!! Form::text('slug', null, ['class' => 'form-control']) !!}
 {!! Form::text('price', null, ['class' => 'form-control']) !!}

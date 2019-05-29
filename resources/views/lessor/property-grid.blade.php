@@ -35,7 +35,7 @@
               Pages
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="property-single.blade.php">Property Single</a>
+              <a class="dropdown-item" href="propertys.blade.php">Property Single</a>
               <a class="dropdown-item" href="blog-single.html">Blog Single</a>
               <a class="dropdown-item" href="agents-grid.html">Agents Grid</a>
               <a class="dropdown-item" href="agent-single.blade.php">Agent Single</a>
@@ -114,7 +114,7 @@
                   <div class="price-box d-flex">
                     <span class="price-a">rent | $ 12.000</span>
                   </div>
-                  <a href="property-single.blade.php" class="link-a">Click here to view
+                  <a href="propertys.blade.php" class="link-a">Click here to view
                     <span class="ion-ios-arrow-forward"></span>
                   </a>
                 </div>
@@ -161,7 +161,7 @@
                   <div class="price-box d-flex">
                     <span class="price-a">rent | $ 12.000</span>
                   </div>
-                  <a href="property-single.blade.php" class="link-a">Click here to view
+                  <a href="propertys.blade.php" class="link-a">Click here to view
                     <span class="ion-ios-arrow-forward"></span>
                   </a>
                 </div>
@@ -208,7 +208,7 @@
                   <div class="price-box d-flex">
                     <span class="price-a">rent | $ 12.000</span>
                   </div>
-                  <a href="property-single.blade.php" class="link-a">Click here to view
+                  <a href="propertys.blade.php" class="link-a">Click here to view
                     <span class="ion-ios-arrow-forward"></span>
                   </a>
                 </div>
@@ -255,7 +255,7 @@
                   <div class="price-box d-flex">
                     <span class="price-a">rent | $ 12.000</span>
                   </div>
-                  <a href="property-single.blade.php" class="link-a">Click here to view
+                  <a href="propertys.blade.php" class="link-a">Click here to view
                     <span class="ion-ios-arrow-forward"></span>
                   </a>
                 </div>
@@ -302,7 +302,7 @@
                   <div class="price-box d-flex">
                     <span class="price-a">rent | $ 12.000</span>
                   </div>
-                  <a href="property-single.blade.php" class="link-a">Click here to view
+                  <a href="propertys.blade.php" class="link-a">Click here to view
                     <span class="ion-ios-arrow-forward"></span>
                   </a>
                 </div>
@@ -349,7 +349,7 @@
                   <div class="price-box d-flex">
                     <span class="price-a">rent | $ 12.000</span>
                   </div>
-                  <a href="property-single.blade.php" class="link-a">Click here to view
+                  <a href="propertys.blade.php" class="link-a">Click here to view
                     <span class="ion-ios-arrow-forward"></span>
                   </a>
                 </div>

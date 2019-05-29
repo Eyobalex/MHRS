@@ -18,6 +18,9 @@ class HouseTableSeeder extends Seeder
         $date = \Carbon\Carbon::now();
         $faker =\Faker\Factory::create();
         $houses = [];
+        $area = rand(175, 1000);
+        $type = ['One Room', 'Apartment', 'house'];
+
         for ($i = 1; $i<=10; $i++){
             $houses[] = [
                 'title' =>  $faker->words(rand(2,4), true),
@@ -28,7 +31,13 @@ class HouseTableSeeder extends Seeder
                 'created_at' => $date,
                 'updated_at' => $date,
                 'location' => $faker->words(2, true),
-                'photo_id' => rand(1,10)
+                'photo_id' => rand(1,10),
+                'views' => rand(10, 50),
+                'area' => "{$area} m",
+                'bedroom' => rand(0,3),
+                'bath' => rand(0,3),
+                'type' => $type[rand(0,2)],
+                'status' => "rent"
             ];
         }
 

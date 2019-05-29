@@ -45,7 +45,7 @@ class HouseController extends Controller
      */
     public function create(House $house)
      {
-        return view('test', compact('house'));
+        return view('lessor.upload', compact('house'));
 
     }
 
@@ -86,7 +86,9 @@ class HouseController extends Controller
     public function show($id)
     {
        $house = House::findOrFail($id);
-       return view('lessor.property-single', compact('house'));
+       return view('lessor.propertys', compact('house'));
+//        return view('about');
+//        return dd($house);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\House;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return redirect(route('house.index'));
+    }
+
+    public function show($id)
+    {
+        $house = House::findOrFail($id);
+        return view('lessor.property', compact('house'));
+//        return view('about');
+//        return dd($house);
     }
 }
