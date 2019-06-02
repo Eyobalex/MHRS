@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>EstateAgency Bootstrap Template</title>
+    <title>Modern House Rental System</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -22,9 +22,13 @@
     <link href="{{ asset("lib/animate/animate.min.css") }}" rel="stylesheet">
     <link href="{{ asset("lib/ionicons/css/ionicons.min.css") }}" rel="stylesheet">
     <link href="{{ asset("lib/owlcarousel/assets/owl.carousel.min.css") }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset("plugins/simplemde/simplemde.min.css") }}">
     <!-- Main Stylesheet File -->
     <link href="{{ asset("css/style.css") }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
+
 
     <!-- =======================================================
       Theme Name: EstateAgency
@@ -139,7 +143,7 @@
             <span></span>
             <span></span>
         </button>
-        <a class="navbar-brand text-brand" href="index.blade.php">Estate<span class="color-b">Agency</span></a>
+        <a class="navbar-brand text-brand" href="{{route('home')}}"> MH<span class="color-b">RS</span></a>
         <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse"
                 data-target="#navbarTogglerDemo01" aria-expanded="false">
             <span class="fa fa-search" aria-hidden="true"></span>
@@ -147,32 +151,49 @@
         <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    @role('lessor')
-                        <a class="nav-link active" href="{{ route('house.index') }}">Home</a>
-                    @endrole
-                    @role('subtenant')
-                        <a class="nav-link  active" href="{{ route('home') }}">Home</a>
-                    @endrole
-                </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Property
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('house.index') }}">View your houses</a>
-                        <a class="dropdown-item" href="{{ route('house.create') }}">Upload a house</a>
-                        {{--<a class="dropdown-item" href="agents-grid.html">Edit a house</a>--}}
-                        {{--<a class="dropdown-item" href="agent-single.blade.php">Agent Single</a>--}}
-                    </div>
+                    @if (Auth::check() && Auth::user()->hasRole('lessor'))
+                        <a class="nav-link" href="{{ route('house.index') }}">Home</a>
+                    @elseif(Auth::check() && Auth::user()->hasRole('subtenant'))
+                        <a class="nav-link " href="{{ route('home') }}">Home</a>
+                    @else
+                        <a class="nav-link " href="{{ route('home') }}">Home</a>
+                    @endif
+
                 </li>
+                @if (Auth::check() && Auth::user()->hasRole('lessor'))
+                    <li class="nav-item">
+                        <a class="nav-link  " href="{{ route('house.create') }}">Upload House</a>
+                    </li>
+                @elseif(Auth::check() && Auth::user()->hasRole('subtenant'))
+                    <li class="nav-item">
+                        <a class="nav-link  " href="{{ route('subtenant.allProperties') }}">Properties</a>
+                    </li>
+                @endif
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('about')}}">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('contact') }}">Contact</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @auth
+                            <a class="dropdown-item" href="property-single.html">Edit</a>
+                        {!! Form::open(['route' => 'logout', 'method' => 'post']) !!}
+                        	{!! Form::submit('Logout', ['class' => 'dropdown-item']) !!}
+                        {!! Form::close() !!}
+                        @endauth
+                        @guest
+                            <a class="dropdown-item" href="{{ route('login') }}">Login</a>
+                        @endguest
+                        </div>
                 </li>
             </ul>
         </div>
@@ -275,8 +296,32 @@
 <!-- Contact Form JavaScript File -->
 <script src="{{ asset("contactform/contactform.js") }}"></script>
 
+<script src="{{ asset("/plugins/simplemde/simplemde.min.js") }}"></script>
+
 <!-- Template Main Javascript File -->
 <script src="{{ asset("js/main.js") }}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $('ul.pagination').addClass('no-margin pagination-sm');
+    $('#title').on('blur', function (){
+        var theTitle = this.value.toLowerCase().trim(),
+            slugInput = $('#slug'),
+            theSlug = theTitle.replace(/&/g, '-and-')
+                .replace(/[^a-z0-9-]+/g,'-')
+                .replace(/\-\-+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        slugInput.val(theSlug);
+    });
+
+    var simplemde = new SimpleMDE({ element: $("description")[0] });
+
+
+</script>
 </body>
 </html>
+
+

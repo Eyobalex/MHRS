@@ -13,13 +13,13 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-Route::group(['prefix' => 'subtenant'], function (){
-//    Route::resource('house', 'HouseController' );
-
+Route::group(['prefix' => 'subtenant', 'middleware'=>['role:subtenant']], function (){
+    Route::get('/house/properties/all', 'SubtenantController@showAllProperties')->name('subtenant.allProperties');
+    Route::get('/house/properties/{house}', 'SubtenantController@show')->name('subtenant.show');
+    Route::get('/house/properties', 'SubtenantController@index')->name('subtenant.index');
 });
-Route::group(['prefix' => 'lessor', 'middleware' => ['role:lessor']], function (){
-    Route::resource('house', 'HouseController' );
-
+Route::group(['prefix'=> 'lessor','middleware' => ['role:lessor']], function (){
+    Route::resource('house', 'LessorController', ['except' => ['show']] );
 });
 Auth::routes();
 

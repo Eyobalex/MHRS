@@ -4,6 +4,7 @@ namespace App;
 
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class House extends Model
 {
@@ -64,5 +65,10 @@ class House extends Model
 
     public function getLessorAttribute(){
         return $this->lessor()->first();
+    }
+
+
+    public function scopeUploadedByUser($query){
+        return $query->where('lessor_id', Auth::user()->id);
     }
 }

@@ -33,8 +33,8 @@ class HouseController extends Controller
      */
     public function index()
     {
-        $houses = House::all();
-        return view('lessor.index', compact("houses"));
+        $houses = House::orderBy('views')->take(5)->get();
+        return view('index', compact("houses"));
     }
 
     /**
@@ -45,7 +45,6 @@ class HouseController extends Controller
      */
     public function create(House $house)
      {
-        return view('lessor.upload', compact('house'));
 
     }
 
@@ -57,25 +56,7 @@ class HouseController extends Controller
      */
     public function store(Request $request)
     {
-        $house = new House();
-        $data = $this->handleRequest($request);
-        if (isset($data['image'])){
-            $photo = new Photo();
-            $photo->extension = $request->file('image')->getClientOriginalExtension();
-            $photo->imagePath =  $data['image'];
-            $photo->save();
-            $house->photo_id = $photo->id;
         }
-        $house->title = $request->title;
-        $house->slug = $request->slug;
-        $house->description = $request->description;
-        $house->price = $request->price;
-        $house->location = $request->location;
-        $house->lessor_id = $request->lessor_id;
-        $house->save();
-
-        return redirect(route('house.index'))->with('message', 'You have successfully uploaded a new house.');
-    }
 
     /**
      * Display the specified resource.
@@ -85,8 +66,7 @@ class HouseController extends Controller
      */
     public function show($id)
     {
-       $house = House::findOrFail($id);
-       return view('lessor.propertys', compact('house'));
+
 //        return view('about');
 //        return dd($house);
     }
@@ -99,8 +79,7 @@ class HouseController extends Controller
      */
     public function edit($id)
     {
-        $house = House::findOrFail($id);
-        return view('lessor.edit', compact('house'));
+
     }
 
     /**
@@ -112,13 +91,7 @@ class HouseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $house = House::findOrFail($id);
-        $oldImage = $house->image;
-        $data = $this->handleRequest($request);
-        $house->update($data);
-        if ($oldImage !== $house->image) {
-            $this->removeImage($oldImage);
-        }
+
     }
 
     /**
@@ -136,29 +109,5 @@ class HouseController extends Controller
     }
 
 
-    private function handleRequest(Request $request)
-    {
-        $data = $request->all();
 
-        if ($request->hasFile('image'))
-        {
-            $image       = $request->file('image');
-            $fileName    = $image->getClientOriginalName();
-            $destination = $this->uploadPath;
-            $successUploaded = $image->move($destination, $fileName);
-
-            if ($successUploaded)
-            {
-                $extension = $image->getClientOriginalExtension();
-                $property = str_replace(".{$extension}", "_property.{$extension}", $fileName);
-                $slide = str_replace(".{$extension}", "_slide.{$extension}", $fileName);
-                Image::make($destination . '/' . $fileName)->resize(config('mhrs.image.property.width'), config('mhrs.image.property.height'))->save($destination . '/' . $property);
-                Image::make($destination . '/' . $fileName)->resize(config('mhrs.image.slide.width'), config('mhrs.image.slide.height'))->save($destination . '/' . $slide);
-            }
-
-            $data['image'] = $fileName;
-        }
-
-        return $data;
-    }
 }
