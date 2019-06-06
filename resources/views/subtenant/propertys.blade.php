@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+
+
+  @include('partials.search')
+  @include('partials.navbar')
+  @include('partials.searchButton')
   <!--/ Intro Single star /-->
   <section class="intro-single">
     <div class="container">
@@ -29,6 +34,8 @@
     </div>
   </section>
   <!--/ Intro Single End /-->
+
+  @include('partials.message')
 
   <!--/ Property Single Star /-->
   <section class="property-single nav-arrow-b">
@@ -110,7 +117,7 @@
                 <p class="description color-text-a">
                   {!! $house->descriptionHtml !!}
                 </p>
-
+                <a href="{{route('subtenant.makeOffer', $house->id)}}" class="btn btn-success">Make an offer</a>
               </div>
 
 

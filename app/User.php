@@ -41,4 +41,14 @@ class User extends Authenticatable
     public function house(){
         return $this->hasMany(House::class);
     }
+
+    public function offer(){
+        return $this->hasOne(Offer::class);
+    }
+
+    public function offers(){
+        return $this->hasMany(Offer::class);
+    }
+
+
 }

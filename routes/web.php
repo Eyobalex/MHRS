@@ -14,17 +14,29 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'subtenant', 'middleware'=>['role:subtenant']], function (){
-    Route::get('/house/properties/all', 'SubtenantController@showAllProperties')->name('subtenant.allProperties');
-    Route::get('/house/properties/{house}', 'SubtenantController@show')->name('subtenant.show');
-    Route::get('/house/properties', 'SubtenantController@index')->name('subtenant.index');
+    Route::get('/properties/all', 'SubtenantController@showAllProperties')->name('subtenant.allProperties');
+    Route::get('/property/{house}', 'SubtenantController@show')->name('subtenant.show');
+    Route::get('/properties', 'SubtenantController@index')->name('subtenant.index');
+    Route::get('/property/makeOffer/{house}', 'SubtenantController@makeOffer')->name('subtenant.makeOffer');
+    Route::get('/offers', 'SubtenantController@offers')->name('subtenant.offers');
+    Route::post('/property/makeOffer/{house}', 'SubtenantController@storeOffer')->name('subtenant.storeOffer');
+    Route::get('/property/myOffers/{offer}', 'SubtenantController@editOffer')->name('subtenant.editOffer');
+    Route::put('/property/makeOffer/{house}', 'SubtenantController@updateOffer')->name('subtenant.updateOffer');
+    Route::delete('/property/offer/{offer}','SubtenantController@deleteOffer')->name('subtenant.deleteOffer');
 });
+
+
+
 Route::group(['prefix'=> 'lessor','middleware' => ['role:lessor']], function (){
     Route::resource('house', 'LessorController', ['except' => ['show']] );
+    Route::get('/house/offers/{offer}', 'LessorController@offers')->name('lessor.offers');
+    Route::patch('/house/offers/reject/{offer}','LessorController@rejectOffer')->name('lessor.rejectOffer');
+    Route::patch('/house/offers/accept/{offer}', 'LessorController@acceptOffer')->name('lessor.acceptOffer');
 });
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HouseController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', function (){return view('about');})->name('about');
 Route::get('/contact', function (){return view('contact');})->name('contact');
-Route::get('/test', function (\App\House $house){return view('test');})->name('test');
+Route::get('/test',"SubtenantController@offers")->name('test');

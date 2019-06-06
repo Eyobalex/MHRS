@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
+  @include('partials.search')
+  @include('partials.navbar')
+  @include('partials.searchButton')
   <!--/ Carousel Star /-->
   <div class="intro intro-carousel">
     <div id="carousel" class="owl-carousel owl-theme">
@@ -136,7 +139,7 @@
               <h2 class="title-a">Latest Properties</h2>
             </div>
             <div class="title-link">
-              <a href="property-grid.blade.php">All Property
+              <a href="{{route('subtenant.allProperties')}}">All Property
                 <span class="ion-ios-arrow-forward"></span>
               </a>
             </div>

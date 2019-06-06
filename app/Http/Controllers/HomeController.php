@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     /**
@@ -24,14 +24,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect(route('house.index'));
+        $houses = House::with('photo')->havePhoto()->orderBy('views', 'desc')->take(5)->get();
+//        foreach ($houses as $house){
+//            return dd($house->imageUrlSlide);
+//        }
+        return view('index', compact("houses"));
+
+//        return "hello";
     }
 
     public function show($id)
     {
         $house = House::findOrFail($id);
         return view('lessor.property', compact('house'));
-//        return view('about');
-//        return dd($house);
     }
 }

@@ -9,23 +9,28 @@
 </head>
 <body>
 
- {!! Form::model( ['route' => 'house.store', 'method' => 'post', 'files' => true]) !!}
-{!! Form::text('title', null, ['class' => 'form-control']) !!}
-{!! Form::text('slug', null, ['class' => 'form-control']) !!}
-{!! Form::text('price', null, ['class' => 'form-control']) !!}
-{!! Form::text('description', null, ['class' => 'form-control']) !!}
-{!! Form::text('location', null, ['class' => 'form-control']) !!}
-{!! Form::text('lessor_id', null, ['class' => 'form-control']) !!}
- {!! Form::file('image', ['class' => 'form-control']) !!}
- 
- {!! Form::submit('Submit', ['class' => 'form-control']) !!}
+@foreach($houses as $house)
 
- {!! Form::close() !!}
+    <p> {{ $house->photo() }}</p>
 
- <br>
-{!! Form::open(['route' => 'logout', 'method' => 'post']) !!}
-	{!! Form::submit('Logout', ['class' => 'form-control']) !!}
-{!! Form::close() !!}
+    @endforeach
+ {{--{!! Form::model( ['route' => 'house.store', 'method' => 'post', 'files' => true]) !!}--}}
+{{--{!! Form::text('title', null, ['class' => 'form-control']) !!}--}}
+{{--{!! Form::text('slug', null, ['class' => 'form-control']) !!}--}}
+{{--{!! Form::text('price', null, ['class' => 'form-control']) !!}--}}
+{{--{!! Form::text('description', null, ['class' => 'form-control']) !!}--}}
+{{--{!! Form::text('location', null, ['class' => 'form-control']) !!}--}}
+{{--{!! Form::text('lessor_id', null, ['class' => 'form-control']) !!}--}}
+ {{--{!! Form::file('image', ['class' => 'form-control']) !!}--}}
+ {{----}}
+ {{--{!! Form::submit('Submit', ['class' => 'form-control']) !!}--}}
+
+ {{--{!! Form::close() !!}--}}
+
+ {{--<br>--}}
+{{--{!! Form::open(['route' => 'logout', 'method' => 'post']) !!}--}}
+	{{--{!! Form::submit('Logout', ['class' => 'form-control']) !!}--}}
+{{--{!! Form::close() !!}--}}
 
 </body>
 </html>

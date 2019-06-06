@@ -2,6 +2,10 @@
 
 @section('content')
 
+    @include('partials.navbar')
+
+</div>
+</nav>
     <section class="intro-single">
         <div class="container">
 
@@ -11,7 +15,7 @@
                 'files'  => TRUE,
                 'id' => 'house-form'
             ]) !!}
-                @include('lessor.form')
+                @include('partials.lessor.form')
                 {!! Form::close() !!}
 
         </div>

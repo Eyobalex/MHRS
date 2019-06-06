@@ -18,6 +18,10 @@ class House extends Model
         $this->dir = config('mhrs.image.directory');
     }
 
+    public function offers(){
+      return  $this->hasMany(Offer::class);
+    }
+
     public function photo(){
         return $this->belongsTo(Photo::class);
     }
@@ -70,5 +74,9 @@ class House extends Model
 
     public function scopeUploadedByUser($query){
         return $query->where('lessor_id', Auth::user()->id);
+    }
+
+    public function scopeHavePhoto($query){
+        return $query->where('photo_id', '!=', null);
     }
 }

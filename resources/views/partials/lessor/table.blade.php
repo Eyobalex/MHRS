@@ -19,6 +19,7 @@
         <td width="50">Bedroom</td>
         <td width="50">Area</td>
         <td width="50">Views</td>
+        <td width="50">offers</td>
         {{--<td width="170">Date</td>--}}
     </tr>
     </thead>
@@ -27,7 +28,7 @@
         <tr>
             <td>
                 {!! Form::open([ 'method' => 'delete', 'route' =>['house.destroy', $house->id]]) !!}
-                <a href="{{ route('house.edit', $house->id) }}" class="btn btn-xs btn-default">
+                <a href="{{ route('lessor.offers', $house->id) }}" class="btn btn-xs btn-default">
                     <i class="fa fa-envelope"></i>
                 </a>
                 <a href="{{ route('house.edit', $house->id) }}" class="btn btn-xs btn-default">
@@ -48,6 +49,8 @@
             <td>{{ $house->bedroom }}</td>
             <td>{{ $house->area }}</td>
             <td>{{ $house->views }}</td>
+            {{--<td>0</td>--}}
+            <td>{{ $house->offers()->count()}}</td>
 
         </tr>
 

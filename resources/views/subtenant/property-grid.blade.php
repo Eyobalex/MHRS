@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
-
+@include('partials.search')
+@include('partials.navbar')
+@include('partials.searchButton')
 
   <!--/ Intro Single star /-->
   <section class="intro-single">
