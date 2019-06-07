@@ -28,13 +28,13 @@
         <tr>
             <td>
                 {!! Form::open([ 'method' => 'delete', 'route' =>['house.destroy', $house->id]]) !!}
-                <a href="{{ route('lessor.offers', $house->id) }}" class="btn btn-xs btn-default">
+                <a href="{{ route('lessor.offers', $house->id) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Offers">
                     <i class="fa fa-envelope"></i>
                 </a>
-                <a href="{{ route('house.edit', $house->id) }}" class="btn btn-xs btn-default">
+                <a href="{{ route('house.edit', $house->id) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="edit">
                     <i class="fa fa-edit"></i>
                 </a>
-                <button type="submit">
+                <button type="submit" data-toggle="tooltip" data-placement="top" title="delete">
                     <i class="fa fa-trash"></i>
                 </button>
 

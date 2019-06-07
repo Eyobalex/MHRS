@@ -68,6 +68,13 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <p>Don't have account yet? sign up <a href="{{ route('register') }}">here</a></p>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>

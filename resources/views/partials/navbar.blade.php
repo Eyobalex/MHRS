@@ -37,17 +37,15 @@
                     <li class="nav-item">
                         <a class="nav-link  " href="{{ route('house.create') }}">Upload House</a>
                     </li>
-                    {{--<li class="nav-item">--}}
-                        {{--<a class="nav-link  " href="{{ route('lessor.myOffers') }}">My offers</a>--}}
-                    {{--</li>--}}
                 @elseif(Auth::check() && Auth::user()->hasRole('subtenant'))
-                    <li class="nav-item">
-                        <a class="nav-link  " href="{{ route('subtenant.allProperties') }}">Properties</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link  " href="{{ route('subtenant.offers') }}">My offers</a>
                     </li>
                 @endif
+                <li class="nav-item">
+                    <a class="nav-link  " href="{{ route('subtenant.allProperties') }}">Properties</a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('about')}}">About</a>

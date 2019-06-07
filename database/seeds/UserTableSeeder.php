@@ -24,7 +24,7 @@ class UserTableSeeder extends Seeder
             [
                 'name' => 'Don Joe',
                 'email' => 'don@test.com',
-                'slug' => 'don_joe',
+//                'slug' => 'don_joe',
                 'bio' => $faker->paragraph(1, true),
                 'password' => bcrypt('12345'),
                 'created_at' => $date,
@@ -34,7 +34,7 @@ class UserTableSeeder extends Seeder
             [
                 'name' => 'Jane doe',
                 'email' => 'jane@test.com',
-                'slug' => 'jane_do',
+//                'slug' => 'jane_do',
                 'bio' => $faker->paragraph(1, true),
                 'password' => bcrypt('12345'),
                 'created_at' => $date,
@@ -44,7 +44,7 @@ class UserTableSeeder extends Seeder
             [
                 'name' => 'John Doe',
                 'email' => 'john@test.com',
-                'slug' => 'john_doe',
+//                'slug' => 'john_doe',
                 'bio' => $faker->paragraph(1, true),
                 'password' => bcrypt('12345'),
                 'created_at' => $date,

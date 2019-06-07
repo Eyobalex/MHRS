@@ -117,7 +117,7 @@
                 <p class="description color-text-a">
                   {!! $house->descriptionHtml !!}
                 </p>
-                <a href="{{route('subtenant.makeOffer', $house->id)}}" class="btn btn-success">Make an offer</a>
+                <a href="{{route('subtenant.makeOffer', $house->id)}} " class="btn btn-success {{(Auth::guest())? "disabled" : " "}}">Make an offer</a>
               </div>
 
 
@@ -180,6 +180,97 @@
             </div>
           </div>
         </div>
+
+      <div class="col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+        <div class="form-comments">
+          <div class="title-box-d">
+            <h3 class="title-d"> Leave a Comment</h3>
+          </div>
+          {!! Form::open([$comment,'route' => ['comment.store', $house->id], 'method' => 'post']) !!}
+        @if (\Illuminate\Support\Facades\Auth::guest())
+            <div class="col-md-12 mb-3">
+              <div class="form-group">
+                {!! Form::text('name', null, ['class' => 'form-control form-control-lg form-control-a', 'placeholder' => 'name *', 'id'=> 'inputName']) !!}
+              </div>
+            </div>
+            <div class="col-md-12 mb-3">
+              <div class="form-group">
+                {!! Form::email('email', null, ['class' => 'form-control form-control-lg form-control-a', 'placeholder'=> 'email *', 'id'=> 'inputEmail1']) !!}
+              </div>
+            </div>
+          @endif
+
+              <div class="col-md-12 mb-3">
+                <div class="form-group">
+                  {!! Form::text('body', null, ['class' => 'form-control form-control-lg form-control-a', 'placeholder'=>'Comment *', 'id'=> 'body']) !!}
+                </div>
+
+              </div>
+              <div class="col-md-12">
+                {{--<button type="submit" class="btn btn-success">Comment</button>--}}
+                {!! Form::submit('Comment', ['class' => 'btn btn-success']) !!}
+              </div>
+
+            </div>
+          {!! Form::close() !!}
+          <form class="form-a" method="post" action="{{ route('comment.store', $house->id) }}">
+
+          </form>
+
+        <div class="title-box-d">
+          @if ($house->comments()->count() >= 4)
+            <h3 class="title-d">Showing 4 out of {{$house->comments()->count()}}  Comments  </h3><a href="{{ route('comment.index', $house->id) }}" class="pull-right">show all</a>
+          @elseif($house->comments()->count() <= 4)
+              <h3 class="title-d">Showing {{ $house->comments()->count() }} Comments</h3>
+          @endif
+        </div>
+        <div class="box-comments">
+          <ul class="list-comments">
+            @foreach($house->comments()->orderBy('updated_at','desc')->take(4)->get() as $comment)
+            <li>
+
+              <div class="comment-details">
+                <h4 class="comment-author">{{$comment->name}}</h4>
+                <span>{{ $comment->updated_at->diffForHumans() }}</span>
+                <p class="comment-description">
+                  =>  {{ $comment->body}}
+                </p>
+                <span href="3" data-toggle="tooltip" data-placement="top" title="report this user" class="fa fa-user-times pull-right"></span>
+
+
+                {!! Form::open(['route' => ['comment.destroy', $comment->id], 'method' => 'delete']) !!}
+                <a href="3" class="fa fa-reply" data-toggle="tooltip" data-placement="top" title="reply"></a>
+                <a href="3" data-toggle="tooltip" data-placement="top" title="report this user" class="fa fa-user-times"></a>
+
+              @if (Auth::check() && $comment->name == Auth::user()->name)
+                  <a href="3" data-toggle="tooltip" data-placement="top" title="edit" class="fa fa-edit"></a>
+                  {{--{!! Form::submit( 'X',['class' => 'fa fa-trash', 'data-toggle' => 'tooltip', 'data-placement'=>'top', 'title'=>'Delete']) !!}--}}
+                  <button onclick="return confirm('Are you sure you want to delete this comment?');" type="submit" href="3" data-toggle="tooltip" data-placement="top" title="delete" class="fa fa-trash"></button>
+                @endif
+                {!! Form::close() !!}
+
+
+              </div>
+            </li>
+            @endforeach
+            {{--<li class="comment-children">--}}
+
+              {{--<div class="comment-details">--}}
+                {{--<h4 class="comment-author">Oliver Colmenares</h4>--}}
+                {{--<span>18 Sep 2017</span>--}}
+                {{--<p class="comment-description">--}}
+                  {{--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores reprehenderit, provident cumque--}}
+                  {{--ipsam temporibus maiores--}}
+                  {{--quae.--}}
+                {{--</p>--}}
+                {{--<a href="3">Reply</a>--}}
+              {{--</div>--}}
+            {{--</li>--}}
+
+          </ul>
+        </div>
+
+      </div>
 
       </div>
   </section>

@@ -16,8 +16,8 @@
         <div class="container">
             <div class="row">
 
-                @include('partials.message')
                 <div class="col-md-12 col-lg-12">
+                    @include('partials.message')
 
                     @if(! $offers->count())
                         <div class="alert alert-danger">

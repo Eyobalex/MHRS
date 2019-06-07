@@ -9,4 +9,6 @@ class Comment extends Model
     public function house(){
         return $this->belongsTo(House::class);
     }
+
+
 }

@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@include('partials.navbar')
+</div>
+</nav>
     <section class="intro-single">
 <div class="container">
     <div class="row justify-content-center">
@@ -39,6 +42,54 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="phone_number" type="number" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" name="phone_number" required autocomplete="phone_number">
+
+                                @error('phone_number')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label  class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+
+                            <div class="col-md-6">
+                                @foreach($roles as $role)
+                                    @if ($role->id != config('mhrs.default.role'))
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input required type="radio" class="form-check-input"  value="{{$role->id}}" name="role">{{ $role->display_name }}
+                                            </label>
+                                        </div>
+                                    @endif
+                               @endforeach
+
+                                @error('role')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="bio" class="col-md-4 col-form-label text-md-right">{{ __('Bio') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea id="bio" class="form-control @error('bio') is-invalid @enderror" name="bio" autocomplete="bio"></textarea>
+                                @error('bio')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
@@ -47,13 +98,12 @@
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 

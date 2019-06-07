@@ -7,12 +7,12 @@
  */?>
 
 @if(session('message'))
-    <div class="alert alert-success">
+    <div class="alert alert-success col-md-12">
         {{session('message')}}
     </div>
 
 @elseif(session('error-message'))
-    <div class="alert alert-danger">
+    <div class="alert alert-danger col-md-12">
         {{ session('error-message') }}
     </div>
 @endif

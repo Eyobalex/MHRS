@@ -19,7 +19,7 @@ class HouseTableSeeder extends Seeder
         $faker =\Faker\Factory::create();
         $houses = [];
         $area = rand(175, 1000);
-        $type = ['One Room', 'Apartment', 'house'];
+        $type = ['Roommate', 'Apartment', 'house'];
 
         for ($i = 1; $i<=10; $i++){
             $houses[] = [

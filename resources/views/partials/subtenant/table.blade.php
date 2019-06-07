@@ -24,10 +24,10 @@
         <tr>
             <td>
                 {!! Form::open([ 'method' => 'delete', 'route' =>['subtenant.deleteOffer', $offer->id]]) !!}
-                <a href="{{ route('subtenant.editOffer', $offer->id) }}" class="btn btn-xs btn-default">
+                <a href="{{ route('subtenant.editOffer', $offer->id) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Edit">
                     <i class="fa fa-edit"></i>
                 </a>
-                <button type="submit">
+                <button type="submit" data-toggle="tooltip" data-placement="top" title="delete">
                     <i class="fa fa-trash"></i>
                 </button>
 

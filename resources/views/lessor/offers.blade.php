@@ -15,9 +15,9 @@
     @include('partials.searchButton')
     <section class="intro-single">
         <div class="container">
+            @include('partials.message')
             <div class="row">
 
-                @include('partials.message')
                 <div class="col-md-12 col-lg-12">
 
                     @if(! $offers->count())
@@ -45,13 +45,13 @@
                                 <tr>
                                     <td>
                                         {!! Form::open([ 'method' => 'patch', 'route' =>['lessor.acceptOffer', $offer->id]]) !!}
-                                            <button  type="submit">
+                                            <button  type="submit" data-toggle="tooltip" data-placement="top" title="Accept Offer">
                                                 <i class="fa fa-check-square"></i>
                                             </button>
                                         {!! Form::close() !!}
 
                                         {!! Form::open([ 'method' => 'patch', 'route' =>['lessor.rejectOffer', $offer->id]]) !!}
-                                            <button type="submit">
+                                            <button type="submit" data-toggle="tooltip" data-placement="top" title="Reject Offer">
                                                 <i class="fa fa-close"></i>
                                             </button>
                                         {!! Form::close() !!}

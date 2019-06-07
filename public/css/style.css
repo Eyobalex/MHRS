@@ -1260,7 +1260,7 @@ a:hover {
 }
 
 .box-comments .list-comments .comment-details {
-  display: table-cell;
+  /*display: table-cell;*/
   vertical-align: top;
   padding-left: 25px;
 }

@@ -18,6 +18,9 @@ return [
             'width' => 600,
             'height' => 800
         ]
+    ],
+    'default' => [
+        'role' => 1
     ]
 
 

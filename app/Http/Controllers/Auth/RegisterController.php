@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -52,6 +54,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required']
         ]);
     }
 
@@ -61,12 +64,52 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+//    protected function create(array $data)
+//    {
+//
+////        dd($data);
+////        $user = User::create([
+////            'name' => $data['name'],
+////            'email' => $data['email'],
+////            'password' => Hash::make($data['password']),
+////            'bio' => $data['bio'],
+////            'phone_number' => $data['phone_number']
+////
+////        ]);
+//        $user = new User();
+//        $user->name = $data['name'];
+//        $user->email = $data['email'];
+//        $user->password =Hash::make($data['name']);
+//        $user->bio = $data['bio'];
+//        $user->phone_number = $data['phone_number'];
+//
+//        $user->attachRole(Role::findOrFail($data['role']));
+////        dd($user);
+//
+//        return $user;
+//    }
+
+    public function register ( Request $request )
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+
+        $user = new User();
+        $user->name =$request->name;
+        $user->email =$request->email;
+        $user->password =Hash::make($request->password);
+        $user->bio =$request->bio;
+        $user->phone_number =$request->phone_number;
+        $user->status = "accepted";
+        $user->save();
+
+        $user->attachRole(Role::findOrFail($request->role));
+
+        return redirect(route('login'))->with('message' , 'you have successfully created an account. you can sign in now.');
+    }
+
+
+    public function showRegistrationForm ()
+    {
+        $roles = Role::all();
+        return view('auth.register', compact('roles'));
     }
 }
